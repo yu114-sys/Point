@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Point</string>
+    <string name="title_download">Download</string>
+    <string name="title_upload">Upload</string>
+    <string name="title_setting">Setting</string>
+    <string name="list_download_button">GET</string>
+</resources>
