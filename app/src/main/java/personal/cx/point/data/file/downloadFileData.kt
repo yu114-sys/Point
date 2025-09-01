@@ -1,7 +1,6 @@
-package personal.cx.point.type.file
+package personal.cx.point.data.file
 
 import personal.cx.point.exception.PointRuntimeException
-import personal.cx.point.type.file.downloadFileData.libraryDatabase
 import java.util.concurrent.locks.ReentrantLock
 
 class downloadFileData {

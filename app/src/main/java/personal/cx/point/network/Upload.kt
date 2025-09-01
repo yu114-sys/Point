@@ -1,4 +1,4 @@
-package personal.cx.point.web
+package personal.cx.point.network
 
 class Upload {
     private class UploadInfoThread : Thread(){

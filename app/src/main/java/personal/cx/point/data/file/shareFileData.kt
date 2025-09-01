@@ -1,10 +1,6 @@
-package personal.cx.point.type.file
+package personal.cx.point.data.file
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.io.File
-import java.math.BigInteger
-import java.time.Instant
 
 class shareFileData {
     data class fileDatabase(

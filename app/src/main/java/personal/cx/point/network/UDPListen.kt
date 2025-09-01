@@ -1,12 +1,12 @@
-package personal.cx.point.web
+package personal.cx.point.network
 
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import personal.cx.point.exception.PointRuntimeException
-import personal.cx.point.type.web.ConnectWebData
-import personal.cx.point.type.globalSetting
-import personal.cx.point.type.innerDatabase
+import personal.cx.point.data.web.ConnectWebData
+import personal.cx.point.data.globalSetting
+import personal.cx.point.data.innerDatabase
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.DatagramPacket

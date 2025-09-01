@@ -1,4 +1,4 @@
-package personal.cx.point.type.web
+package personal.cx.point.data.web
 
 data class ConnectWebData (
     //message type

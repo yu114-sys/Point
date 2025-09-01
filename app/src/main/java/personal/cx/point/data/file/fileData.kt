@@ -1,4 +1,4 @@
-package personal.cx.point.type.file
+package personal.cx.point.data.file
 
 import personal.cx.point.exception.PointRuntimeException
 import java.io.File

@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import personal.cx.point.databinding.ActivityMainBinding
-import personal.cx.point.type.globalSetting
+import personal.cx.point.data.globalSetting
 
 class MainActivity : AppCompatActivity() {
 

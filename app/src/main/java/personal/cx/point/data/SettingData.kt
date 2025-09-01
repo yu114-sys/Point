@@ -1,4 +1,4 @@
-package personal.cx.point.type
+package personal.cx.point.data
 
 import android.content.SharedPreferences
 import personal.cx.point.exception.PointRuntimeException
