@@ -5,8 +5,8 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import personal.cx.point.exception.PointRuntimeException
 import personal.cx.point.data.web.ConnectWebData
-import personal.cx.point.data.globalSetting
-import personal.cx.point.data.innerDatabase
+import personal.cx.point.app.globalSetting
+import personal.cx.point.app.innerDatabase
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.DatagramPacket

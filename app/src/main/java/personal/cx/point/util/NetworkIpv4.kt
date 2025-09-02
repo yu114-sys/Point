@@ -1,4 +1,4 @@
-package personal.cx.point.network
+package personal.cx.point.util
 
 import java.net.InetAddress
 
