@@ -95,7 +95,7 @@ class downloadFileData {
     }
 
     fun add(name : String, ip : String, password : String, libraryType : Int){
-    	    var element = libraryDatabase(name, ip, password, libraryType, null)
+    	    var element = libraryDatabase(size(),name, ip, password, libraryType, null)
     	    database.add(element)
     }
     fun addByLibrary(elements : List<libraryDatabase>){
@@ -124,8 +124,8 @@ class downloadFileData {
 
         lock.unlock()
     }
-    fun setByString(data : String, ip : String, password: String){
-        //TODO
+    fun addByString(data : String, ip : String){
+        //TODO 暂不处理
     }
     fun setFiles(id : Int, fileData: fileData){
         val element = findById(id)
@@ -175,16 +175,29 @@ class downloadFileData {
         return null
     }
     fun searchElementByName(name: String, area: Int = 0): List<libraryDatabase> {
-        var listReturn = mutableListOf<libraryDatabase>()
-
+        val listReturn = mutableListOf<libraryDatabase>()
         lock.lock()
+        try {
+            // 步骤1：筛选所有名称「包含」目标 name 的库（消去密码，线程安全）
+            for (lib in database) {
+                // 忽略大小写匹配（如需严格大小写，去掉 equalsIgnoreCase）
+                if (lib.name.contains(name, ignoreCase = true)) {
+                    listReturn.add(copyLibrary(lib)) // copyLibrary 自动清空密码
+                }
+            }
 
-        for(i in database){
-            //TODO 先进行包含匹配，筛出所有包含name: String的libraryDatabase的可变列表，再在这个可变列表中进行精确匹配，看是否有完全与name一致的项，把它移动至可变列表的第一位
+            // 步骤2：在结果中查找「精确匹配」的库，移至列表首位
+            val exactMatchIndex = listReturn.indexOfFirst { 
+                it.name.equals(name, ignoreCase = true) 
+            }
+            if (exactMatchIndex != -1 && exactMatchIndex != 0) {
+                // 移除精确匹配项，插入到头部
+                val exactMatchLib = listReturn.removeAt(exactMatchIndex)
+                listReturn.add(0, exactMatchLib)
+            }
+        } finally {
+            lock.unlock() // 确保锁释放
         }
-
-        lock.unlock()
-
         return listReturn.toList()
     }
 }
