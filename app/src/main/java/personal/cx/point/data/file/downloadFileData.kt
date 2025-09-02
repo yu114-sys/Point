@@ -6,14 +6,12 @@ import java.util.concurrent.locks.ReentrantLock
 class downloadFileData {
     data class libraryDatabase(
         val id: Int,
-        val key: String,
         val password: String,
 
         val name: String,
         val ip: String,
 
-        var webState: Int,
-        var libraryState: Int,
+        var libraryType: Int,
 
         var files: fileData?
     )
@@ -29,11 +27,9 @@ class downloadFileData {
         val tempLibrary : libraryDatabase = libraryDatabase(
             goalLibrary.id,
             "",
-            "",
             goalLibrary.name,
             goalLibrary.ip,
-            goalLibrary.webState,
-            goalLibrary.libraryState,
+            goalLibrary.libraryType,
             goalLibrary.files
         )
 
@@ -44,8 +40,8 @@ class downloadFileData {
 
     //ports
 
-    //以下获取元素的函数均会消去key与password信息
-    //The following functions for obtaining elements will eliminate key and password information
+    //以下获取元素的函数均会消去password信息
+    //The following functions for obtaining elements will eliminate password information
     fun libraryList() : List<libraryDatabase> {
         lock.lock()
 
@@ -93,19 +89,6 @@ class downloadFileData {
 
         return pw
     }
-    fun key(id : Int) : String?{
-        lock.lock()
-
-        val element = findById(id)
-        var key : String? = null
-        if(element != null){
-            key = element.key
-        }
-
-        lock.unlock()
-
-        return key
-    }
 
     fun setByLibrary(elements : List<libraryDatabase>){
         var ifExit = 0
@@ -121,10 +104,7 @@ class downloadFileData {
                 }
             }
             if(ifExit == 1){
-                if(element != null){
-                    element.webState = 3
-                }
-                else{
+                if(element == null){
                     throw PointRuntimeException("Error: type/file/shareFileData - class downloadFileData - fun reSet 逻辑错误")
                 }
             }
@@ -136,7 +116,7 @@ class downloadFileData {
 
         lock.unlock()
     }
-    fun setByString(data : String, ip : String, key: String, password: String){
+    fun setByString(data : String, ip : String, password: String){
         //TODO
     }
     fun setFiles(id : Int, fileData: fileData){
@@ -151,24 +131,13 @@ class downloadFileData {
         lock.unlock()
     }
     //basic data manage
-    fun setWebState(id: Int, num: Int) {
+    fun setLibraryType(id: Int, num: Int) {
         val element = findById(id)
 
         lock.lock()
 
         if(element != null){
-            element.webState = num
-        }
-
-        lock.unlock()
-    }
-    fun setLibraryState(id: Int, num: Int) {
-        val element = findById(id)
-
-        lock.lock()
-
-        if(element != null){
-            element.libraryState = num
+            element.libraryType = num
         }
 
         lock.unlock()
