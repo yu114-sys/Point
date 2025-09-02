@@ -6,10 +6,11 @@ import java.util.concurrent.locks.ReentrantLock
 class downloadFileData {
     data class libraryDatabase(
         val id: Int,
-        val password: String,
-
+        
         val name: String,
         val ip: String,
+        
+        val password: String,
 
         var libraryType: Int,
 
@@ -26,9 +27,9 @@ class downloadFileData {
 
         val tempLibrary : libraryDatabase = libraryDatabase(
             goalLibrary.id,
-            "",
             goalLibrary.name,
             goalLibrary.ip,
+            "",
             goalLibrary.libraryType,
             goalLibrary.files
         )
@@ -76,6 +77,9 @@ class downloadFileData {
 
         return size
     }
+    
+    
+    //通过该函数来获取密码
     fun password(id : Int) : String?{
         lock.lock()
 
@@ -90,7 +94,11 @@ class downloadFileData {
         return pw
     }
 
-    fun setByLibrary(elements : List<libraryDatabase>){
+    fun add(name : String, ip : String, password : String, libraryType : Int){
+    	    var element = libraryDatabase(name, ip, password, libraryType, null)
+    	    database.add(element)
+    }
+    fun addByLibrary(elements : List<libraryDatabase>){
         var ifExit = 0
         var element : libraryDatabase? = null
 
@@ -151,7 +159,7 @@ class downloadFileData {
     }
 
     //tool functions
-    fun findById(id : Int): libraryDatabase? {
+    fun getElementById(id : Int): libraryDatabase? {
 
         lock.lock()
 
@@ -166,15 +174,13 @@ class downloadFileData {
 
         return null
     }
-    fun findByName(name: String, area: Int = 0): List<libraryDatabase> {
+    fun searchElementByName(name: String, area: Int = 0): List<libraryDatabase> {
         var listReturn = mutableListOf<libraryDatabase>()
 
         lock.lock()
 
         for(i in database){
-            if(i.name == name){
-                listReturn.add(i)
-            }
+            //TODO 先进行包含匹配，筛出所有包含name: String的libraryDatabase的可变列表，再在这个可变列表中进行精确匹配，看是否有完全与name一致的项，把它移动至可变列表的第一位
         }
 
         lock.unlock()
