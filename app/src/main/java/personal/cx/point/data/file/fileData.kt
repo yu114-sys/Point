@@ -3,7 +3,7 @@ package personal.cx.point.data.file
 import personal.cx.point.exception.PointRuntimeException
 import java.io.File
 
-class fileData{
+class fileData(root_name : String){
     data class files (
         val name : String,
         var path : String?,
@@ -16,12 +16,18 @@ class fileData{
         val str: String
     )
 
-    var root : files? = null
-    var realPath = ""
+    
+
+    //构造
+
+    init {
+    	    var root = files(root_name, "", false, 0, null)
+        var realPath = ""
+    }
 
     //ports
 
-    fun createNode(name: String, path: String, folder: Boolean, size: Long, file: List<files>? = null) : files?{
+    fun addNode(name: String, path: String, folder: Boolean, size: Long, file: List<files>? = null) : files?{
         val faFolder = toPath(path)
         val fileN = newFiles(name, path, folder, size, null)
         if(faFolder != null){
@@ -32,7 +38,7 @@ class fileData{
         return null
     }
 
-    fun setByFile(fileN: File, node: files? = null){
+    fun addByFile(fileN: File, node: files? = null){
         var element : files? = null
         if(node == null){
             realPath = fileN.absolutePath
@@ -44,12 +50,12 @@ class fileData{
         }
         if()
     }
-    fun setByPath(path: String, node: files? = null){
-
+    fun addByPath(path: String, node: files){
+        //TODO 把node的files添加至path所在的folder为true的节点的的file子项
     }
 
     fun toString(path : String, deepth : Int) : String{
-
+    
     }
     fun setByString(str : String, node: files? = null){
 
