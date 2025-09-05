@@ -8,8 +8,7 @@ class SettingData () {
     private val dir = mapOf(
         "initial" to 1,
 
-        "connect_key_en" to 1,
-        "connect_key" to 3,
+        "multipleNum" to 2,
 
         "library_listen_port" to 2,
         "library_listen_delay" to 2,
@@ -76,8 +75,7 @@ class SettingData () {
     fun initial(){
         write("initial", true)
 
-        write("connect_key_en", false)
-        write("connect_key", "")
+        write("multipleNum", 300)
 
         initialSenior()
     }
